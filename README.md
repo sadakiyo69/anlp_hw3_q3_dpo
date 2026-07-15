@@ -1,4 +1,4 @@
-# README
+# Part 3: Programming Exercise: Direct Preference Optimization Objective Function
 
 ## 1. Setup
 

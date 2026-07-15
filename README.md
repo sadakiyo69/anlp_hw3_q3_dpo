@@ -2,8 +2,7 @@
 
 ## 1. Setup
 
-To ensure that the `pytest -q` command successfully discovered the `src` module without raising `ModuleNotFoundError` or `ImportError`, I created an empty `conftest.py` file in the project root. This automatically added the project root to the Python path during test collection.
-
+I ran the tests using `python -m pytest -q`. Running pytest as a Python module ensured that the project root was available on the Python path, so the src package was discovered correctly without additional configuration.
 ---
 
 ## 2. Test Run
@@ -43,15 +42,15 @@ ex12: logit= 0.250, loss= 0.576, prompt=How does DPO use preference pairs?
 
 ### What does a positive DPO logit mean?
 
-A positive DPO logit means that the current policy prefers the chosen response over the rejected response more strongly than the reference policy does. This indicates that the model already agrees with the preference pair for that example.
+It means that the current policy prefers the chosen response over the rejected response, better than the reference policy does. This is an indicator of the fact that the model already agrees with the preference pair, in that example.
 
 ### Why does DPO compare the current policy against a reference policy?
 
-The reference policy provides a baseline so that the current policy is only rewarded for improving relative to the original model. This helps prevent the policy from drifting too far while still learning from preference data.
+DPO uses the reference policy as a baseline. Thus, the current policy is only rewarded for improving relative to the original model. DPO does this to ensure the policy is not drifting too far while still learning from preference data.
 
 ### What does the beta parameter control?
 
-The beta parameter controls how strongly differences between the current policy and the reference policy affect the DPO objective. Larger beta values make the optimization more sensitive to preference differences, while smaller values produce more conservative updates.
+It controls how strongly differences between the reference policy and the current policy affect the DPO objective. Smaller values for beta produce more conservative updates. Conversely, larger values for beta make the optimization more sensitive to preference differences.
 
 ### Pick one example with a low loss and one example with a high loss. Explain the difference.
 
